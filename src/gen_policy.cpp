@@ -27,12 +27,12 @@ const uint32_t TEST_FUNC_COUNT = 5;
 
 const uint32_t MAX_ALLOWED_INT_TYPES = 3;
 
-const uint32_t MAX_ARITH_DEPTH = 5;
+//const uint32_t MAX_ARITH_DEPTH = 5;
 const uint32_t MAX_TOTAL_EXPR_COUNT = 50000000;
 const uint32_t MAX_FUNC_EXPR_COUNT = 10000000;
 
-const uint32_t MIN_SCOPE_STMT_COUNT = 5;
-const uint32_t MAX_SCOPE_STMT_COUNT = 10;
+//const uint32_t MIN_SCOPE_STMT_COUNT = 5;
+//const uint32_t MAX_SCOPE_STMT_COUNT = 10;
 
 const uint32_t MAX_TOTAL_STMT_COUNT = 5000;
 const uint32_t MAX_FUNC_STMT_COUNT = 1000;
@@ -42,20 +42,20 @@ const uint32_t MAX_INP_VAR_COUNT = 60;
 const uint32_t MIN_MIX_VAR_COUNT = 20;
 const uint32_t MAX_MIX_VAR_COUNT = 60;
 
-const uint32_t MAX_CSE_COUNT = 5;
+//const uint32_t MAX_CSE_COUNT =  5;
 
-const uint32_t MAX_IF_DEPTH = 3;
+//const uint32_t MAX_IF_DEPTH = 3;
 
 const uint64_t MAX_TEST_COMPLEXITY = UINT64_MAX;
 
 const uint32_t MIN_STRUCT_TYPES_COUNT = 0;
-const uint32_t MAX_STRUCT_TYPES_COUNT = 6;
+const uint32_t MAX_STRUCT_TYPES_COUNT = 0;
 const uint32_t MIN_INP_STRUCT_COUNT = 0;
-const uint32_t MAX_INP_STRUCT_COUNT = 6;
+const uint32_t MAX_INP_STRUCT_COUNT = 0;
 const uint32_t MIN_MIX_STRUCT_COUNT = 0;
-const uint32_t MAX_MIX_STRUCT_COUNT = 6;
+const uint32_t MAX_MIX_STRUCT_COUNT = 0;
 const uint32_t MIN_OUT_STRUCT_COUNT = 0;
-const uint32_t MAX_OUT_STRUCT_COUNT = 8;
+const uint32_t MAX_OUT_STRUCT_COUNT = 0;
 const uint32_t MIN_STRUCT_MEMBER_COUNT = 1;
 const uint32_t MAX_STRUCT_MEMBER_COUNT = 10;
 const uint32_t MAX_STRUCT_DEPTH = 5;
@@ -65,7 +65,7 @@ const uint32_t MAX_BIT_FIELD_SIZE = 2; //TODO: unused, because it cause differen
 const uint32_t CONST_BUFFER_SIZE = 4;
 
 // This switch totally disables array in generated tests
-const bool DISABLE_ARRAYS = false;
+//const bool DISABLE_ARRAYS = false;
 const uint32_t MIN_ARRAY_SIZE = 2;
 const uint32_t MAX_ARRAY_SIZE = 10;
 const uint32_t MIN_ARRAY_TYPES_COUNT = 0;
@@ -195,7 +195,7 @@ void GenPolicy::init_from_config () {
     max_mix_array_count = MAX_MIX_ARRAY_COUNT;
     min_out_array_count = MIN_OUT_ARRAY_COUNT;
     max_out_array_count = MAX_OUT_ARRAY_COUNT;
-    if (DISABLE_ARRAYS) {
+    if (!options->enable_arrays) {
         min_array_type_count = max_array_type_count = 0;
         min_inp_array_count = max_inp_array_count = 0;
         min_mix_array_count = max_mix_array_count = 0;
@@ -209,12 +209,12 @@ void GenPolicy::init_from_config () {
     min_out_ptr_count = MIN_OUT_PTR_COUNT;
     max_out_ptr_count = MAX_OUT_PTR_COUNT;
 
-    max_arith_depth = MAX_ARITH_DEPTH;
+    max_arith_depth = options->max_arith_depth;
     max_total_expr_count = MAX_TOTAL_EXPR_COUNT;
     max_func_expr_count = MAX_FUNC_EXPR_COUNT;
 
-    min_scope_stmt_count = MIN_SCOPE_STMT_COUNT;
-    max_scope_stmt_count = MAX_SCOPE_STMT_COUNT;
+    min_scope_stmt_count = options->min_scope_stmt_count;
+    max_scope_stmt_count = options->max_scope_stmt_count;
 
     max_total_stmt_count = MAX_TOTAL_STMT_COUNT;
     max_func_stmt_count = MAX_FUNC_STMT_COUNT;
@@ -224,7 +224,7 @@ void GenPolicy::init_from_config () {
     min_mix_var_count = MIN_MIX_VAR_COUNT;
     max_mix_var_count = MAX_MIX_VAR_COUNT;
 
-    max_cse_count = MAX_CSE_COUNT;
+    max_cse_count = options->max_cse_count;
 
     for (int i = UnaryExpr::Op::Plus; i < UnaryExpr::Op::MaxOp; ++i) {
         Probability<UnaryExpr::Op> prob ((UnaryExpr::Op) i, 10);
@@ -331,7 +331,7 @@ void GenPolicy::init_from_config () {
     else_prob.push_back(no_else);
     rand_val_gen->shuffle_prob(else_prob);
 
-    max_if_depth = MAX_IF_DEPTH;
+    max_if_depth = options->max_if_depth;
 
     decl_stmt_gen_id_prob.emplace_back(Probability<GenPolicy::DeclStmtGenID>(GenPolicy::DeclStmtGenID::Variable, 80));
     decl_stmt_gen_id_prob.emplace_back(Probability<GenPolicy::DeclStmtGenID>(GenPolicy::DeclStmtGenID::Pointer, 20));

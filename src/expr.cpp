@@ -146,6 +146,15 @@ UB AssignExpr::propagate_value () {
 }
 
 void AssignExpr::emit (std::ostream& stream, std::string offset) {
+	if (options->print_assignments && from->get_id() != Node::NodeID::REFERENCE && from->get_type_id() != Type::TypeID::POINTER_TYPE) {
+		stream << offset;
+		stream << "printf(\"";
+		to->emit(stream);
+		stream << " = %lld\\n\", (unsigned long long)";
+		from->emit(stream);
+		stream << ");" << std::endl;
+	}
+
     stream << offset;
     to->emit(stream);
     stream << " = ";

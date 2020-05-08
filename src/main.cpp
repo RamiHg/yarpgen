@@ -179,6 +179,29 @@ int main (int argc, char* argv[128]) {
         }
     };
 
+	auto max_arith_depth = [](std::string arg) {
+		options->max_arith_depth = std::stoul(arg);
+	};
+	auto min_scope_stmt_count = [](std::string arg) {
+		options->min_scope_stmt_count = std::stoul(arg);
+	};
+	auto max_scope_stmt_count = [](std::string arg) {
+		options->max_scope_stmt_count = std::stoul(arg);
+	};
+	auto max_cse_count = [](std::string arg) {
+		options->max_cse_count = std::stoul(arg);
+	};
+	auto max_if_depth = [](std::string arg) {
+		options->max_if_depth = std::stoul(arg);
+	};
+	auto enable_arrays = [](std::string arg) {
+		options->enable_arrays = std::stoul(arg) != 0;
+	};
+	auto print_assignments = [](std::string arg) {
+		options->print_assignments = std::stoul(arg) != 0;
+	};
+
+
     // Main loop for parsing command-line options
     for (int i = 0; i < argc; ++i) {
         if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) {
@@ -199,6 +222,13 @@ int main (int argc, char* argv[128]) {
                                            "Seed wasn't specified.")) {}
         else if (parse_long_and_short_args(argc, i, argv, "-m", "--bit-mode", bit_mode_action,
                                            "Can't recognize bit mode:")) {}
+		else if (parse_long_args(i, argv, "--max_arith_depth", max_arith_depth, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--min_scope_stmt_count", min_scope_stmt_count, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--max_scope_stmt_count", max_scope_stmt_count, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--max_cse_count", max_cse_count, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--max_if_depth", max_if_depth, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--enable_arrays", enable_arrays, "Invalid")) {}
+		else if (parse_long_args(i, argv, "--print_assignments", print_assignments, "Invalid")) {}
         else if (argv[i][0] == '-') {
             print_usage_and_exit("Unknown option: " + std::string(argv[i]));
         }
@@ -216,8 +246,8 @@ int main (int argc, char* argv[128]) {
 
     Program mas (out_dir);
     mas.generate ();
+	mas.emit_decl();
     mas.emit_func ();
-    mas.emit_decl ();
     mas.emit_main ();
 
     delete(options);

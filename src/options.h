@@ -48,10 +48,23 @@ struct Options {
 
     StandardID standard_id;
     bool mode_64bit;
+	bool single_file = true;
 
     bool include_valarray;
     bool include_vector;
     bool include_array;
+
+	uint32_t max_arith_depth = 5;
+
+	uint32_t min_scope_stmt_count = 5;
+	uint32_t max_scope_stmt_count = 10;
+
+	uint32_t max_cse_count = 5;
+
+	uint32_t max_if_depth = 3;
+
+	bool enable_arrays = true;
+	bool print_assignments = false;
 };
 
 extern Options *options;
