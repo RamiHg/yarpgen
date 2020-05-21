@@ -217,7 +217,7 @@ std::shared_ptr<StructType> StructType::generate (std::shared_ptr<Context> ctx,
             if (add_substruct) {
                 primary_type = std::make_shared<StructType>(*substruct_type);
             }
-            else {
+            else if (options->enable_bit_fields) {
                 GenPolicy::BitFieldID bit_field_dis = rand_val_gen->get_rand_id(p->get_bit_field_prob());
                 // In C, bit-field may be declared with a type other than unsigned int or signed int
                 // only with "J.5.8 Extended bit-field types"
