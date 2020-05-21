@@ -48,14 +48,14 @@ const uint32_t MAX_MIX_VAR_COUNT = 60;
 
 const uint64_t MAX_TEST_COMPLEXITY = UINT64_MAX;
 
-const uint32_t MIN_STRUCT_TYPES_COUNT = 0;
-const uint32_t MAX_STRUCT_TYPES_COUNT = 0;
-const uint32_t MIN_INP_STRUCT_COUNT = 0;
-const uint32_t MAX_INP_STRUCT_COUNT = 0;
-const uint32_t MIN_MIX_STRUCT_COUNT = 0;
-const uint32_t MAX_MIX_STRUCT_COUNT = 0;
-const uint32_t MIN_OUT_STRUCT_COUNT = 0;
-const uint32_t MAX_OUT_STRUCT_COUNT = 0;
+//const uint32_t MIN_STRUCT_TYPES_COUNT = 0;
+//const uint32_t MAX_STRUCT_TYPES_COUNT = 6;
+//const uint32_t MIN_INP_STRUCT_COUNT = 0;
+//const uint32_t MAX_INP_STRUCT_COUNT = 6;
+//const uint32_t MIN_MIX_STRUCT_COUNT = 0;
+//const uint32_t MAX_MIX_STRUCT_COUNT = 6;
+//const uint32_t MIN_OUT_STRUCT_COUNT = 0;
+//const uint32_t MAX_OUT_STRUCT_COUNT = 8;
 const uint32_t MIN_STRUCT_MEMBER_COUNT = 1;
 const uint32_t MAX_STRUCT_MEMBER_COUNT = 10;
 const uint32_t MAX_STRUCT_DEPTH = 5;
@@ -131,14 +131,14 @@ void GenPolicy::init_from_config () {
     }
 
     allow_struct = true;
-    min_struct_type_count = MIN_STRUCT_TYPES_COUNT;
-    max_struct_type_count = MAX_STRUCT_TYPES_COUNT;
-    min_inp_struct_count = MIN_INP_STRUCT_COUNT;
-    max_inp_struct_count = MAX_INP_STRUCT_COUNT;
-    min_mix_struct_count = MIN_MIX_STRUCT_COUNT;
-    max_mix_struct_count = MAX_MIX_STRUCT_COUNT;
-    min_out_struct_count = MIN_OUT_STRUCT_COUNT;
-    max_out_struct_count = MAX_OUT_STRUCT_COUNT;
+    min_struct_type_count= options->min_struct_type_count;
+	max_struct_type_count= options->max_struct_type_count;
+	min_inp_struct_count = options->min_inp_struct_count;
+	max_inp_struct_count = options->max_inp_struct_count;
+	min_mix_struct_count = options->min_mix_struct_count;
+	max_mix_struct_count = options->max_mix_struct_count;
+	min_out_struct_count = options->min_out_struct_count;
+	max_out_struct_count = options->max_out_struct_count;
     min_struct_member_count = MIN_STRUCT_MEMBER_COUNT;
     max_struct_member_count = MAX_STRUCT_MEMBER_COUNT;
     allow_mix_cv_qual_in_struct = false;
