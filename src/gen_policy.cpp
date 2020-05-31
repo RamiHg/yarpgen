@@ -27,12 +27,9 @@ const uint32_t TEST_FUNC_COUNT = 5;
 
 const uint32_t MAX_ALLOWED_INT_TYPES = 3;
 
-//const uint32_t MAX_ARITH_DEPTH = 5;
 const uint32_t MAX_TOTAL_EXPR_COUNT = 50000000;
 const uint32_t MAX_FUNC_EXPR_COUNT = 10000000;
 
-//const uint32_t MIN_SCOPE_STMT_COUNT = 5;
-//const uint32_t MAX_SCOPE_STMT_COUNT = 10;
 
 const uint32_t MAX_TOTAL_STMT_COUNT = 5000;
 const uint32_t MAX_FUNC_STMT_COUNT = 1000;
@@ -42,20 +39,8 @@ const uint32_t MAX_INP_VAR_COUNT = 60;
 const uint32_t MIN_MIX_VAR_COUNT = 20;
 const uint32_t MAX_MIX_VAR_COUNT = 60;
 
-//const uint32_t MAX_CSE_COUNT =  5;
-
-//const uint32_t MAX_IF_DEPTH = 3;
-
 const uint64_t MAX_TEST_COMPLEXITY = UINT64_MAX;
 
-//const uint32_t MIN_STRUCT_TYPES_COUNT = 0;
-//const uint32_t MAX_STRUCT_TYPES_COUNT = 6;
-//const uint32_t MIN_INP_STRUCT_COUNT = 0;
-//const uint32_t MAX_INP_STRUCT_COUNT = 6;
-//const uint32_t MIN_MIX_STRUCT_COUNT = 0;
-//const uint32_t MAX_MIX_STRUCT_COUNT = 6;
-//const uint32_t MIN_OUT_STRUCT_COUNT = 0;
-//const uint32_t MAX_OUT_STRUCT_COUNT = 8;
 const uint32_t MIN_STRUCT_MEMBER_COUNT = 1;
 const uint32_t MAX_STRUCT_MEMBER_COUNT = 10;
 const uint32_t MAX_STRUCT_DEPTH = 5;
