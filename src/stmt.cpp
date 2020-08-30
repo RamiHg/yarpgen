@@ -492,6 +492,19 @@ void ScopeStmt::emit (std::ostream& stream, std::string offset) {
     stream << offset + "{\n";
     for (const auto &i : scope) {
         i->emit(stream, offset + "    ");
+        auto *stmt = dynamic_cast<DeclStmt*>(i.get()); 
+        if (stmt) {
+            auto data= stmt->get_data();
+            if (options->print_assignments && data->get_class_id() == Data::VarClassID::VAR && !data->get_type()->get_is_static()
+                && data->get_type()->get_type_id() != Type::TypeID::POINTER_TYPE) {
+                stream << std::endl << offset << "    ";
+                stream << "printf(\"";
+                stream << data->get_name() + data->get_type()->get_type_suffix();
+                stream << " = %lld\\n\", (unsigned long long)";
+                stream << data->get_name() + data->get_type()->get_type_suffix();
+                stream << ");" << std::endl;
+            }
+        }
         stream << "\n";
     }
     stream << offset + "}\n";
