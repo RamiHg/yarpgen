@@ -245,12 +245,10 @@ void Program::emit_decl () {
 		out_file.open(out_folder + "/" + "single.c");
 	else
 		out_file.open(out_folder + "/" + "init.h");
-    if (options->include_valarray)
-        out_file << "#include <valarray>\n\n";
-    if (options->include_vector)
-        out_file << "#include <vector>\n\n";
-    if (options->include_array)
-        out_file << "#include <array>\n\n";
+        
+    if (options->include_valarray) out_file << "#include <valarray>\n\n";
+    if (options->include_vector) out_file << "#include <vector>\n\n";
+    if (options->include_array) out_file << "#include <array>\n\n";
 
 	out_file << "#include <stdio.h>\n";
     for (unsigned int i = 0; i < gen_policy.get_test_func_count(); ++i) {
