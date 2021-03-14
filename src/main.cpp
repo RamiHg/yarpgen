@@ -142,22 +142,18 @@ int main(int argc, char *argv[128]) {
 
   // Detects predefined seed
   auto seed_action = [&seed](std::string arg) {
-    size_t *pEnd = nullptr;
-    std::stringstream arg_ss(arg);
-    std::string segment;
-    std::vector<std::string> seed_list;
-    while (std::getline(arg_ss, segment, '_')) seed_list.push_back(segment);
+    std::stringstream arg_ss;
 
-    if ((seed_list.size() > 1 &&
-         seed_list.at(0) != options->plane_yarpgen_version) ||
-        seed_list.size() > 2)
-      ERROR("Incompatible yarpgen version in seed: " + arg);
-
-    try {
-      seed = std::stoull(seed_list.back(), pEnd, 10);
-    } catch (std::invalid_argument &e) {
-      print_usage_and_exit("Can't recognize seed: " + arg);
+    if (arg.size() > 2 && arg[2] == '_') {
+      if (arg.substr(0, 2) != options->plane_yarpgen_version) {
+        ERROR("Incompatible yarpgen version in seed: " + arg);
+      }
+      arg_ss = std::stringstream(arg.substr(3));
+    } else {
+      arg_ss = std::stringstream(arg);
     }
+    
+    arg_ss >> seed;
   };
 
   // Detects YARPGen bit_mode
